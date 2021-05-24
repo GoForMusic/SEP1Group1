@@ -18,11 +18,9 @@ import java.io.IOException;
 
 public class VIAClubGUIController
 {
-    @FXML private Tab allPlayerTab;
     @FXML private Pane tabPlayers;
     @FXML private Pane tabMatches;
     @FXML private Pane tabExport;
-    public Label errorMessage;
 
     /**
      * This method will initialize the data when the interface was open.
@@ -33,18 +31,11 @@ public class VIAClubGUIController
 
     /**
      * This method will pre-setup all the tabs on the interface and set-up other controllers to work
-     * @throws IOException
+     * @throws IOException if they cannot load a specific fxml file
      */
     private void updateStudentsFromACountryTab() throws IOException {
         tabPlayers.getChildren().add(new FXMLLoader().load(getClass().getResource("PlayerGUI.fxml")));
         tabMatches.getChildren().add(new FXMLLoader().load(getClass().getResource("MatchGUI.fxml")));
         tabExport.getChildren().add(new FXMLLoader().load(getClass().getResource("ExportGUI.fxml")));
     }
-
-    public void setErrorMessage(String message)
-    {
-        errorMessage.setText(message);
-    }
-
-
 }

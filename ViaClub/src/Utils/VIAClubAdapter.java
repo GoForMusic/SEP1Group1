@@ -61,9 +61,8 @@ public class VIAClubAdapter
    */
   public ArrayList<Player> getAllPlayersStatus(String status)
   {
-    ArrayList<Player> players;
-    ArrayList<Player> playersStatus = new ArrayList<>();
-    players=getAllPlayers();
+    ArrayList<Player> players=getAllPlayers();
+    ArrayList<Player> playersStatus = new ArrayList<Player>();
     for(int i=0;i<players.size();i++)
     {
       if(players.get(i).getStatus().equals(status))
@@ -72,7 +71,7 @@ public class VIAClubAdapter
       }
     }
 
-    return players;
+    return playersStatus;
   }
 
   /**

@@ -8,6 +8,7 @@ import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 
+import javax.swing.*;
 import java.util.ArrayList;
 
 /**
@@ -28,6 +29,7 @@ public class PlayerGUIController {
     @FXML private ComboBox<String> comboPlayerStatus;
     @FXML private Button buttonCreate;
     @FXML private Button buttonSave;
+    @FXML private ComboBox<String> playerType;
 
 
     private VIAClubAdapter adapter;
@@ -45,18 +47,20 @@ public class PlayerGUIController {
         playerIndex=0;
         adapter = new VIAClubAdapter("players.bin","matches.bin","matches.xml");
         players = adapter.getAllPlayers();
+        playerType.getItems().addAll("All","Available","Suspended","Injured");
+        playerType.getSelectionModel().selectFirst();
         comboPlayerStatus.getItems().addAll("Available","Suspended","Injured");
-        setListDetails();
+        setListDetails(adapter.getAllPlayers());
     }
 
     /**
     * A method which loads all the players stored in the file on the list view
     * First, will clear the whole list, this function have the role of the reset the list and populate it again
     * */
-    private void setListDetails()
+    private void setListDetails(ArrayList<Player> list)
     {
         playerList.getItems().clear();
-        players = adapter.getAllPlayers();
+        players = list;
 
         for(Player player:players)
         {
@@ -88,7 +92,7 @@ public class PlayerGUIController {
             //remove player button event handler using lambda method
             removeButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (MouseEvent mouseEvent)->{
                 adapter.removePlayer(player);
-                setListDetails();
+                setListDetails(adapter.getAllPlayers());
             });
 
             //add the buttons on HBox and after populate the playerList with the hBox
@@ -126,17 +130,18 @@ public class PlayerGUIController {
     * */
     @FXML void clickMouseSaveEventButton(MouseEvent event) {
         if (labelFirstName.getText().isEmpty() || labelSecondName.getText().isEmpty() || labelPlayerNumber.getText().isEmpty() || labelPreferredPosition.getText().isEmpty()) {
-            //TODO Warning message;
-            System.out.println("All fields must be filled");
+            Alert alert = new Alert(Alert.AlertType.ERROR, "All fields must be filled!");
+            alert.showAndWait();
         } else {
             Player localPlayer = new Player(labelFirstName.getText(), labelSecondName.getText(), Integer.parseInt(labelPlayerNumber.getText()), labelPreferredPosition.getText(), comboPlayerStatus.getValue());
 
-            System.out.println(playerIndex);
             //edit the object on the specific index who will be stored in the lambda function
             adapter.editPlayer(localPlayer,playerIndex);
+            Alert alert = new Alert(Alert.AlertType.INFORMATION, "The player new details have been saved!");
+            alert.showAndWait();
             dialogPop.setVisible(false);
             //update the player list with the new player
-            setListDetails();
+            setListDetails(adapter.getAllPlayers());
         }
     }
 
@@ -148,14 +153,28 @@ public class PlayerGUIController {
     @FXML void clickMouseCreateEventButton(MouseEvent event) {
         if(labelFirstName.getText().isEmpty()||labelSecondName.getText().isEmpty()||labelPlayerNumber.getText().isEmpty()||labelPreferredPosition.getText().isEmpty())
         {
-            //TODO Warning message;
-            System.out.println("All fields must be filled");
+            Alert alert = new Alert(Alert.AlertType.ERROR, "All fields must be filled!");
+            alert.showAndWait();
         }else {
             Player localPlayer = new Player(labelFirstName.getText(), labelSecondName.getText(), Integer.parseInt(labelPlayerNumber.getText()), labelPreferredPosition.getText(), comboPlayerStatus.getValue());
             adapter.savePlayer(localPlayer);
+            Alert alert = new Alert(Alert.AlertType.INFORMATION, "The player have been created!");
+            alert.showAndWait();
             dialogPop.setVisible(false);
             //update the player list with the new player
-            setListDetails();
+            setListDetails(adapter.getAllPlayers());
+        }
+    }
+
+    /**
+     * A method that will search and show all the players with a specific status
+     */
+    @FXML void clickMouseSearch(MouseEvent event) {
+        if(playerType.getValue()=="All")
+        {
+            setListDetails(adapter.getAllPlayers());
+        }else{
+            setListDetails(adapter.getAllPlayersStatus(playerType.getValue()));
         }
     }
 }
