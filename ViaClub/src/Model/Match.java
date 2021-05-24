@@ -1,8 +1,9 @@
 package Model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Match
+public class Match implements Serializable
 {
   private String team1;
   private String team2;
@@ -12,14 +13,13 @@ public class Match
   private MyDate date;
   private Location location;
 
-  public Match(MyDate date, String team1, String team2, Location location,
-      String type, String score, ArrayList<Player> listOfPlayers)
+  public Match(MyDate date, String team1, String team2, Location location, String type)
   {
     this.team1 = team1;
     this.team2 = team2;
     this.type = type;
-    this.score = score;
-    listOfPlayers = new ArrayList<>();
+    this.score = "0 - 0";
+    this.listOfPlayers = new ArrayList<>();
     this.date = date.copy();
     this.location = location.copy();
   }

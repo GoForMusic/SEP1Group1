@@ -4,6 +4,8 @@ import Model.Match;
 import Model.Player;
 import Model.VIAClub;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class VIAClubAdapter
@@ -23,14 +25,14 @@ public class VIAClubAdapter
 
   public ArrayList<Player> getAllPlayers()
   {
-    ArrayList<Player> players;
+    ArrayList<Player> players = new ArrayList<Player>();
     players = (ArrayList<Player>)MyFileIO.readObjectFromFile(playersFileName);
     return players;
   }
 
   public ArrayList<Match> getAllMatches()
   {
-    ArrayList<Match> matches;
+    ArrayList<Match> matches=new ArrayList<Match>();
     matches = (ArrayList<Match>)MyFileIO.readObjectFromFile(matchesFileName);
     return matches;
   }
@@ -103,52 +105,26 @@ public class VIAClubAdapter
 
   public void savePlayer(Player obj)
   {
-    ArrayList<Player> players = getAllPlayers();
-    if(!players.contains(obj))
-    {
-      players.add(obj);
-    }
-    MyFileIO.writeObjectToFile(matchesFileName,players);
+    ArrayList<Player> localList = getAllPlayers();
+    localList.add(obj);
+    MyFileIO.writeObjectToFile(playersFileName, localList);
   }
 
   public void savePlayers(ArrayList<Player> players)
   {
-    ArrayList<Player> storedPlayers = getAllPlayers();
-
-    if(storedPlayers==null)
-    {
       MyFileIO.writeObjectToFile(playersFileName, players);
-    }
-    else
-    {
-      storedPlayers.addAll(players);
-      MyFileIO.writeObjectToFile(playersFileName, storedPlayers);
-    }
   }
 
   public void saveMatch(Match obj)
   {
-    ArrayList<Match> matches = getAllMatches();
-    if(!matches.contains(obj))
-    {
-      matches.add(obj);
-    }
-    MyFileIO.writeObjectToFile(matchesFileName,matches);
+    ArrayList<Match> localList = getAllMatches();
+    localList.add(obj);
+    saveMatches(localList);
   }
 
   public void saveMatches(ArrayList<Match> matches)
   {
-    ArrayList<Match> storedMatches = getAllMatches();
-
-    if(storedMatches==null)
-    {
       MyFileIO.writeObjectToFile(matchesFileName, matches);
-    }
-    else
-    {
-      storedMatches.addAll(matches);
-      MyFileIO.writeObjectToFile(matchesFileName, storedMatches);
-    }
   }
 
   public void exportMatches(ArrayList<Match> matches)

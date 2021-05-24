@@ -1,7 +1,9 @@
 package Model;
+import java.io.Serializable;
 import java.util.GregorianCalendar;
 
-public class MyDate {
+public class MyDate implements Serializable
+{
     private int day;
     private int month;
     private int year;
