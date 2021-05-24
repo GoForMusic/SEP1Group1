@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="512.0" prefWidth="781.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.VIAClubGUIController">
+   <bottom>
+      <Pane prefHeight="38.0" prefWidth="781.0" style="-fx-background-color: #343a40;" BorderPane.alignment="CENTER">
+         <children>
+            <Label layoutX="30.0" layoutY="11.0" text="Error Message:::" textFill="RED" />
+         </children>
+      </Pane>
+   </bottom>
+   <top>
+      <Pane prefHeight="47.0" prefWidth="781.0" style="-fx-background-color: #343a40;" BorderPane.alignment="CENTER">
+         <children>
+            <Label alignment="BASELINE_CENTER" layoutX="288.0" layoutY="16.0" text="VIA Club System Managment" textFill="WHITE" />
+         </children>
+      </Pane>
+   </top>
+   <center>
+      <TabPane prefHeight="200.0" prefWidth="200.0" stylesheets="@resources/style.css" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+        <tabs>
+          <Tab fx:id="allPlayerTab" text="Players">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Pane fx:id="tabPlayers" prefHeight="398.0" prefWidth="781.0" />
+                     </children></AnchorPane>
+            </content>
+          </Tab>
+          <Tab text="Matches">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Pane fx:id="tabMatches" prefHeight="398.0" prefWidth="781.0" />
+                     </children></AnchorPane>
+            </content>
+          </Tab>
+            <Tab text="Export XML">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+              </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+   </center>
+</BorderPane>
