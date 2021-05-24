@@ -54,6 +54,11 @@ public class Match
     this.score = team1Score + "-" + team2Score;
   }
 
+  public void setScore(String score)
+  {
+    this.score = score;
+  }
+
   public MyDate getDate()
   {
     return date;
