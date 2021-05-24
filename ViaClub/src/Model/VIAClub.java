@@ -61,7 +61,7 @@ public class VIAClub
   }
   public void editMatches(int index, Match match)
   {
-  matches.get(index).setdate(match.getDate());
+  matches.get(index).setDate(match.getDate());
   matches.get(index).setLocation(match.getLocation());
   matches.get(index).setType(match.getType());
   matches.get(index).setTeam1(match.getTeam1());
