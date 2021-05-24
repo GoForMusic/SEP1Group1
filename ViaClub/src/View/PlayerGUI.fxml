@@ -31,23 +31,20 @@
                   <Insets />
                </opaqueInsets>
             </Button>
-            <TextField prefHeight="4.0" prefWidth="171.0">
+            <ComboBox fx:id="playerType" prefWidth="150.0">
                <HBox.margin>
                   <Insets left="300.0" />
                </HBox.margin>
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
-            </TextField>
-            <Button mnemonicParsing="false" prefHeight="24.0" prefWidth="86.0" stylesheets="@resources/style.css" text="Search" />
+            </ComboBox>
+            <Button mnemonicParsing="false" onMouseClicked="#clickMouseSearch" prefHeight="24.0" prefWidth="86.0" stylesheets="@resources/style.css" text="Search" />
          </children>
          <padding>
             <Insets left="10.0" top="5.0" />
          </padding>
       </HBox>
-      <VBox alignment="CENTER" layoutY="12.0" prefHeight="386.0" prefWidth="781.0">
+      <VBox alignment="CENTER" layoutY="39.0" prefHeight="359.0" prefWidth="781.0">
          <children>
-            <ListView fx:id="playerList" nodeOrientation="LEFT_TO_RIGHT" prefHeight="342.0" prefWidth="781.0">
+            <ListView fx:id="playerList" nodeOrientation="LEFT_TO_RIGHT" prefHeight="360.0" prefWidth="781.0">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets></ListView>
@@ -75,7 +72,8 @@
                   <Label layoutX="68.0" layoutY="208.0" text="Status:" textFill="WHITE" />
                   <ComboBox fx:id="comboPlayerStatus" layoutX="189.0" layoutY="206.0" prefHeight="24.0" prefWidth="171.0" />
                   <Button layoutX="204.0" layoutY="285.0" mnemonicParsing="false" onMouseClicked="#clickMouseCancelEvent" prefHeight="38.0" prefWidth="93.0" styleClass="buttonRed" stylesheets="@resources/style.css" text="Cancel" />
-                  <Button fx:id="buttonCreateSave" layoutX="430.0" layoutY="285.0" mnemonicParsing="false" onMouseClicked="#clickMouseCreateSaveEvent" prefHeight="38.0" prefWidth="101.0" styleClass="buttonGreen" stylesheets="@resources/style.css" text="Create/Save" />
+                  <Button fx:id="buttonCreate" layoutX="430.0" layoutY="285.0" mnemonicParsing="false" onMouseClicked="#clickMouseCreateEventButton" prefHeight="38.0" prefWidth="101.0" styleClass="buttonGreen" stylesheets="@resources/style.css" text="Create" visible="false" />
+                  <Button fx:id="buttonSave" layoutX="430.0" layoutY="285.0" mnemonicParsing="false" onMouseClicked="#clickMouseSaveEventButton" prefHeight="38.0" prefWidth="101.0" styleClass="buttonGreen" stylesheets="@resources/style.css" text="Save" visible="false" />
                </children>
             </AnchorPane>
           </content>

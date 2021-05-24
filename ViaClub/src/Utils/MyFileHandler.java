@@ -5,10 +5,18 @@ import com.thoughtworks.xstream.io.xml.DomDriver;
 import java.io.*;
 import java.util.ArrayList;
 
-//Writes the given object to a binary file with the specified file name
-//If the file already exists, it will be erased and a new file with the same name will be created.
+/**
+ * Class used for writing and reading binary files and writing a text file (to export the XML file format)
+ * @author Adrian Militaru, Adrian Pompierescu, Gabriel Moutinho Tristan, Freja Hansen
+ * @version 1.0
+ */
 public class MyFileHandler
 {
+  /**
+   * A method that will write an object to a binary file
+   * @param fileName the binary file name
+   * @param obj Object that will be inserted into the binary file
+   */
   public void writeObjectToFile(String fileName, Object obj)
   {
     ObjectOutputStream writeToFile=null;
@@ -38,8 +46,10 @@ public class MyFileHandler
     }
   }
 
-  //Reads the object from the file and returns it. Notice that the returned object
-  //has to be casted to the desired class type.
+  /**
+   * A method that will read an object from a binary file
+   * @param fileName the binary file name
+   */
   public Object readObjectFromFile(String fileName)
   {
     Object obj=null;
@@ -86,9 +96,11 @@ public class MyFileHandler
     return obj;
   }
 
-  //converts de given array list to xml and saves it to the specified file.
-  //if the file exists, it will be deleted and created a new one, as this
-  //function is designed only to export data.
+  /**
+   * A method that will write an array list of string on text file in xml format
+   * @param arrayList the list of strings
+   * @param fileName the text file name
+   */
   public void writeToXmlFile(ArrayList<?> arrayList, String fileName)
   {
     XStream xstream = new XStream(new DomDriver());

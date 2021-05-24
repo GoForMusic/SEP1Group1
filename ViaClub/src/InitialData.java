@@ -7,6 +7,13 @@ import Utils.VIAClubAdapter;
 
 import java.util.ArrayList;
 
+
+/**
+ * The InitialData class initializes 4 players and 4 matches.After running it, the Main class should be run so the GUI will start.
+ * @author Adrian Militaru, Adrian Pompierescu, Gabriel Moutinho Tristan, Freja Hansen
+ * @version 1.0
+ */
+
 public class InitialData {
     public static void main(String[] args)
     {
