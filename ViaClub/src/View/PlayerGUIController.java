@@ -142,6 +142,7 @@ public class PlayerGUIController {
             dialogPop.setVisible(false);
             //update the player list with the new player
             setListDetails(adapter.getAllPlayers());
+            clickMouseCancelEvent(event);
         }
     }
 
@@ -163,6 +164,7 @@ public class PlayerGUIController {
             dialogPop.setVisible(false);
             //update the player list with the new player
             setListDetails(adapter.getAllPlayers());
+            clickMouseCancelEvent(event);
         }
     }
 
