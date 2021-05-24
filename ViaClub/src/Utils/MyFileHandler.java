@@ -15,6 +15,7 @@ public class MyFileHandler
     try
     {
       writeToFile = new ObjectOutputStream(new FileOutputStream(fileName));
+
       writeToFile.writeObject(obj);
     }
     catch(IOException e)
