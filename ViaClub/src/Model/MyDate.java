@@ -30,21 +30,21 @@ public class MyDate {
 
     public void setDay(int day) {
         if (day == 0) {
-            throw new IllegalDataException(day);
+            throw new IllegalArgumentException();
         } else
             this.day = day;
     }
 
     public void setMonth(int month) {
         if (day == 0) {
-            throw new IllegalDataException(month);
+            throw new IllegalArgumentException();
         } else
             this.month = month;
     }
 
     public void setYear(int year) {
         if (day == 0) {
-            throw new IllegalDataException(year);
+            throw new IllegalArgumentException();
         } else
             this.year = year;
     }
