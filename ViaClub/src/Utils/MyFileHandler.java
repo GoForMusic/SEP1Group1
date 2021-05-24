@@ -9,7 +9,7 @@ import java.util.ArrayList;
 //If the file already exists, it will be erased and a new file with the same name will be created.
 public class MyFileHandler
 {
-  public static void writeObjectToFile(String fileName, Object obj)
+  public void writeObjectToFile(String fileName, Object obj)
   {
     ObjectOutputStream writeToFile=null;
     try
@@ -39,7 +39,7 @@ public class MyFileHandler
 
   //Reads the object from the file and returns it. Notice that the returned object
   //has to be casted to the desired class type.
-  public static Object readObjectFromFile(String fileName)
+  public Object readObjectFromFile(String fileName)
   {
     Object obj=null;
     ObjectInputStream readFromFile=null;
@@ -54,6 +54,10 @@ public class MyFileHandler
       {
         //Finish reading
       }
+    }
+    catch(FileNotFoundException e)
+    {
+      System.out.println("File not found");
     }
     catch(IOException e)
     {
@@ -84,7 +88,7 @@ public class MyFileHandler
   //converts de given array list to xml and saves it to the specified file.
   //if the file exists, it will be deleted and created a new one, as this
   //function is designed only to export data.
-  public static void writeToXmlFile(ArrayList<?> arrayList, String fileName)
+  public void writeToXmlFile(ArrayList<?> arrayList, String fileName)
   {
     XStream xstream = new XStream(new DomDriver());
     String xml = xstream.toXML(arrayList);
