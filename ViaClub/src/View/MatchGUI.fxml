@@ -82,8 +82,8 @@
                   <Label layoutX="189.0" layoutY="251.0" text="Country:" textFill="WHITE" />
                   <Label layoutX="189.0" layoutY="277.0" text="City:" textFill="WHITE" />
                   <Label layoutX="189.0" layoutY="308.0" text="Stadiun:" textFill="WHITE" />
-                  <ListView fx:id="playerList" layoutX="391.0" layoutY="58.0" prefHeight="102.0" prefWidth="257.0" visible="false" />
-                  <ListView fx:id="playersWhoWillPlay" layoutX="391.0" layoutY="208.0" prefHeight="102.0" prefWidth="257.0" visible="false" />
+                  <ListView fx:id="playerList" layoutX="391.0" layoutY="58.0" onMouseClicked="#clickSelectPlayerForMatch" prefHeight="102.0" prefWidth="257.0" />
+                  <ListView fx:id="playersWhoWillPlay" layoutX="391.0" layoutY="208.0" onMouseClicked="#clickRemoveAPlayerForMatch" prefHeight="102.0" prefWidth="257.0" />
                </children>
             </AnchorPane>
           </content>

@@ -66,11 +66,11 @@ public class PlayerGUIController {
         {
             HBox hBox = new HBox();
             //add the player first name and last name on the list
-            hBox.getChildren().add(new Label(player.getFirstName() + " " + player.getLastName()));
+            hBox.getChildren().add(new Label(player.getFirstName() + " " + player.getLastName()+" | "+ player.getStatus()));
             //add edit button
             Button editButton = new Button("Edit");
             editButton.getStyleClass().add("buttonGreen");
-            HBox.setMargin(editButton,new Insets(0,5,0,500));
+            HBox.setMargin(editButton,new Insets(0,5,0,350));
 
             //edit player button event handler using lambda method
             editButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (MouseEvent mouseEvent) -> {

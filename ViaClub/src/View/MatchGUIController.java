@@ -32,8 +32,8 @@ public class MatchGUIController {
     @FXML private TextField labelCountryName;
     @FXML private TextField labelCityName;
     @FXML private TextField labelStadiumName;
-    @FXML private ListView<Label> playerList;
-    @FXML private ListView<Label> playersWhoWillPlay;
+    @FXML private ListView<Player> playerList;
+    @FXML private ListView<Player> playersWhoWillPlay;
 
 
     private VIAClubAdapter adapter;
@@ -61,11 +61,11 @@ public class MatchGUIController {
         {
             HBox hBox = new HBox();
             //add the player first name and last name on the list
-            hBox.getChildren().add(new Label(match.getTeam1() + " vs " + match.getTeam2()));
+            hBox.getChildren().add(new Label(match.getTeam1() + " vs " + match.getTeam2()+" | "+match.getType()));
             //add edit button
             Button editButton = new Button("Edit");
             editButton.getStyleClass().add("buttonGreen");
-            HBox.setMargin(editButton,new Insets(0,5,0,500));
+            HBox.setMargin(editButton,new Insets(0,5,0,350));
 
             //edit player button event handler using lambda method
             editButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (MouseEvent mouseEvent) -> {
@@ -90,12 +90,23 @@ public class MatchGUIController {
                 if(!localListWhoIsPlaying.isEmpty()){
                     for(Player player:localListWhoIsPlaying)
                     {
-                        Label label = new Label(player.getFirstName()+" "+player.getLastName());
-                        playersWhoWillPlay.getItems().add(label);
+                        playersWhoWillPlay.getItems().add(player);
                     }
                 }
-                //TODO: set-up a list of players base on the match type
-                playerList.getItems().add(new Label("Working.."));
+
+
+                for(Player player:players)
+                {
+                    if(match.getType().equals("Friendly") && !player.getStatus().equals("Injured")){
+                        playerList.getItems().add(player);
+                    }else if(match.getType().equals("League") && !player.getStatus().equals("Injured") && !player.getStatus().equals("Suspended"))
+                    {
+                        playerList.getItems().add(player);
+                    }else if(match.getType().equals("Cup") && !player.getStatus().equals("Injured") && !player.getStatus().equals("Suspended")){
+                        playerList.getItems().add(player);
+                    }
+                }
+
 
                 matchIndex=matches.indexOf(match);
             });
@@ -145,6 +156,13 @@ public class MatchGUIController {
             MyDate localDate = new MyDate(matchDate.getValue().getDayOfMonth(), matchDate.getValue().getMonthValue(),matchDate.getValue().getYear());
             Location localLocation = new Location(labelCountryName.getText(),labelCityName.getText(),labelStadiumName.getText());
             Match localMatch = new Match(localDate,labelTeam1Name.getText(),labelTeam2Name.getText(),localLocation, comboMatchType.getValue());
+
+            if(!playersWhoWillPlay.getItems().isEmpty()){
+                for(Player player:playersWhoWillPlay.getItems()){
+                    localMatch.addPlayer(player);
+                }
+            }
+
             adapter.editMatch(localMatch,matchIndex);
             Alert alert = new Alert(Alert.AlertType.INFORMATION, "The match have been created!");
             alert.showAndWait();
@@ -212,6 +230,17 @@ public class MatchGUIController {
         }else{
             setListDetails(adapter.getAllMatchesType(matchType.getValue()));
         }
+    }
+
+    @FXML void clickSelectPlayerForMatch(MouseEvent event) {
+        int index = playerList.getSelectionModel().getSelectedIndex();
+        playersWhoWillPlay.getItems().add(playerList.getSelectionModel().getSelectedItem());
+        playerList.getItems().remove(index);
+    }
+
+    @FXML void clickRemoveAPlayerForMatch(MouseEvent event){
+        int index = playersWhoWillPlay.getSelectionModel().getSelectedIndex();
+        playersWhoWillPlay.getItems().remove(index);
     }
 
 }
