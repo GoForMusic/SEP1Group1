@@ -85,11 +85,49 @@ public class MyDate implements Serializable
     }
 
     /**
+     * A method that will return the day
+     * @return day
+     */
+    public int getDay() {
+        return day;
+    }
+
+    /**
+     * A method that will return the Month
+     * @return month
+     */
+    public int getMonth() {
+        return month;
+    }
+
+    /**
+     * A method that will return the year
+     * @return year
+     */
+    public int getYear() {
+        return year;
+    }
+
+    /**
      * A method that will return a String with the date format as dd/mm/yyyy
      * @return the date
      */
     public String toString() {
         return this.day + "/" + this.month + "/" + this.year;
+    }
+
+    /**
+     * A method that will verify if another object is equal with my date
+     * @param obj the another obj
+     * @return true if everything is matching otherwise false
+     */
+    public boolean equals(Object obj){
+        if(!(obj instanceof MyDate)) return false;
+
+        MyDate myDate = (MyDate) obj;
+
+        if(this.day== myDate.day&&this.month==myDate.month&&this.year==myDate.year) return true;
+        else return false;
     }
 
     /**

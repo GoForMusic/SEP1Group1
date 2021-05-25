@@ -130,10 +130,7 @@ public class Player implements Serializable
    */
   @Override public String toString()
   {
-    return "Player" + "firstName='" + firstName + '\'' + ", lastName='"
-        + lastName + '\'' + ", playerNumber=" + playerNumber
-        + ", preferredPosition='" + preferredPosition + '\'' + ", status='"
-        + status + '\'';
+    return this.firstName+" "+this.lastName+" | "+this.status;
   }
 
   /**

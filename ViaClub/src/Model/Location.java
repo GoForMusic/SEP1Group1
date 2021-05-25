@@ -105,6 +105,20 @@ public class Location implements Serializable
     }
 
     /**
+     * A method that will verify if another object is equal with Location
+     * @param obj the another obj
+     * @return true if everything is matching otherwise false
+     */
+    public boolean equals(Object obj){
+        if(!(obj instanceof Location)) return false;
+
+        Location location = (Location) obj;
+
+        if(this.city.equals(location.city)&&this.country.equals(location.country)&&this.stadium.equals(location.stadium)) return true;
+        else return false;
+    }
+
+    /**
      * A method that returns a copy of location
      * @return copy of location
      */

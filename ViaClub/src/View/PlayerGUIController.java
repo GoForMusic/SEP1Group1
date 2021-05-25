@@ -46,10 +46,10 @@ public class PlayerGUIController {
     {
         playerIndex=0;
         adapter = new VIAClubAdapter("players.bin","matches.bin","matches.xml");
-        players = adapter.getAllPlayers();
         playerType.getItems().addAll("All","Available","Suspended","Injured");
         playerType.getSelectionModel().selectFirst();
         comboPlayerStatus.getItems().addAll("Available","Suspended","Injured");
+        comboPlayerStatus.getSelectionModel().selectFirst();
         setListDetails(adapter.getAllPlayers());
     }
 
@@ -66,11 +66,11 @@ public class PlayerGUIController {
         {
             HBox hBox = new HBox();
             //add the player first name and last name on the list
-            hBox.getChildren().add(new Label(player.getFirstName() + " " + player.getLastName()));
+            hBox.getChildren().add(new Label(player.getFirstName() + " " + player.getLastName()+" | "+ player.getStatus()));
             //add edit button
             Button editButton = new Button("Edit");
             editButton.getStyleClass().add("buttonGreen");
-            HBox.setMargin(editButton,new Insets(0,5,0,500));
+            HBox.setMargin(editButton,new Insets(0,5,0,350));
 
             //edit player button event handler using lambda method
             editButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (MouseEvent mouseEvent) -> {
@@ -111,7 +111,7 @@ public class PlayerGUIController {
     }
 
     /**
-     *   This method will hid the dialogBox and will clear all the cache memory of the input fields
+     *   This method will hide the dialogBox and will clear all the cache memory of the input fields
      * */
     @FXML void clickMouseCancelEvent(MouseEvent event) {
         buttonCreate.setVisible(false);
