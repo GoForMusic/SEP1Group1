@@ -204,10 +204,8 @@ public class Match implements Serializable
     }
     Match other = (Match) obj;
 
-    return date.equals(other.date) && team1.equals(other.team1) && team2
-        .equals(other.team2) && location.equals(other.location) && type
-        .equals(other.type) && score.equals(other.score) && listOfPlayers
-        .equals(other.listOfPlayers);
+    if(this.team1.equals(other.team1)&&this.team2.equals(other.team2)&&this.score.equals(other.score)&&this.date.equals(other.date)&&this.location.equals(other.location)&&this.listOfPlayers.equals(other.listOfPlayers)) return true;
+    else return false;
   }
 
 }

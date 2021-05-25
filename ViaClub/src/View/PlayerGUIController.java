@@ -46,10 +46,10 @@ public class PlayerGUIController {
     {
         playerIndex=0;
         adapter = new VIAClubAdapter("players.bin","matches.bin","matches.xml");
-        players = adapter.getAllPlayers();
         playerType.getItems().addAll("All","Available","Suspended","Injured");
         playerType.getSelectionModel().selectFirst();
         comboPlayerStatus.getItems().addAll("Available","Suspended","Injured");
+        comboPlayerStatus.getSelectionModel().selectFirst();
         setListDetails(adapter.getAllPlayers());
     }
 
@@ -111,7 +111,7 @@ public class PlayerGUIController {
     }
 
     /**
-     *   This method will hid the dialogBox and will clear all the cache memory of the input fields
+     *   This method will hide the dialogBox and will clear all the cache memory of the input fields
      * */
     @FXML void clickMouseCancelEvent(MouseEvent event) {
         buttonCreate.setVisible(false);

@@ -81,9 +81,8 @@ public class VIAClubAdapter
    */
   public ArrayList<Match> getAllMatchesType(String type)
   {
-    ArrayList<Match> matches;
-    ArrayList<Match> matchesByType = new ArrayList<>();
-    matches=getAllMatches();
+    ArrayList<Match> matches=getAllMatches();
+    ArrayList<Match> matchesByType = new ArrayList<Match>();
     for(int i=0;i<matches.size();i++)
     {
       if (matches.get(i).getType().equals(type))
@@ -118,6 +117,7 @@ public class VIAClubAdapter
     ArrayList<Match> matches = getAllMatches();
     if(matches.contains(obj))
     {
+      System.out.println("Test1");
       matches.remove(obj);
     }
     MyFileIO.writeObjectToFile(matchesFileName,matches);
