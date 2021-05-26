@@ -34,6 +34,8 @@ public class MatchGUIController {
     @FXML private TextField labelStadiumName;
     @FXML private ListView<Player> playerList;
     @FXML private ListView<Player> playersWhoWillPlay;
+    @FXML private Label labelAvailablePlayers;
+    @FXML private Label labelPlayersWhoArePlaying;
 
 
     private VIAClubAdapter adapter;
@@ -72,6 +74,8 @@ public class MatchGUIController {
                 playersWhoWillPlay.getItems().clear();
                 playerList.getItems().clear();
                 dialogPop.setVisible(true);
+                labelAvailablePlayers.setVisible(true);
+                labelPlayersWhoArePlaying.setVisible(true);
                 buttonSave.setVisible(false);
                 playersWhoWillPlay.setVisible(true);
                 playerList.setVisible(true);
@@ -207,6 +211,8 @@ public class MatchGUIController {
     @FXML void clickMouseCancelEvent(MouseEvent event) {
         buttonCreate.setVisible(false);
         buttonSave.setVisible(false);
+        labelAvailablePlayers.setVisible(false);
+        labelPlayersWhoArePlaying.setVisible(false);
         dialogPop.setVisible(false);
         playersWhoWillPlay.setVisible(false);
         playerList.setVisible(false);
@@ -232,12 +238,18 @@ public class MatchGUIController {
         }
     }
 
+    /**
+     * A method that will be use to select a player for the specific match
+     */
     @FXML void clickSelectPlayerForMatch(MouseEvent event) {
         int index = playerList.getSelectionModel().getSelectedIndex();
         playersWhoWillPlay.getItems().add(playerList.getSelectionModel().getSelectedItem());
         playerList.getItems().remove(index);
     }
 
+    /**
+     * A method that will be use to remove a player from the specific match
+     */
     @FXML void clickRemoveAPlayerForMatch(MouseEvent event){
         int index = playersWhoWillPlay.getSelectionModel().getSelectedIndex();
         playersWhoWillPlay.getItems().remove(index);
