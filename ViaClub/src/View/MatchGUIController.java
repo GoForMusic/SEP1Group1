@@ -13,8 +13,15 @@ import javafx.scene.layout.HBox;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.Locale;
+import java.util.Optional;
+
+
+/**
+ * The Match GUI controller allow to see and modify details
+ * about matches who are inside the VIAClub system (file system) and what players can play in the specific match
+ * @author Adrian Militaru, Adrian Pompierescu, Gabriel Moutinho Tristan, Freja Hansen
+ * @version 1.0
+ */
 
 public class MatchGUIController {
 
@@ -43,6 +50,11 @@ public class MatchGUIController {
     private ArrayList<Match> matches;
     private int matchIndex;
 
+    /**
+     * This method will initialize the data when the match interface is opened.
+     * Firstly, declares the adaptor object of type VIAClubAdaptor and a global variables
+     * Also, this method will load and set all the matches in a list view
+     * */
     public void initialize()
     {
         adapter = new VIAClubAdapter("players.bin","matches.bin","matches.xml");
@@ -54,6 +66,10 @@ public class MatchGUIController {
         setListDetails(adapter.getAllMatches());
     }
 
+    /**
+     * A method which loads all the matches stored in the file on the list view
+     * First, will clear the whole list, this function have the role of the reset the list and populate it again
+     * */
     private void setListDetails(ArrayList<Match> list)
     {
         matchList.getItems().clear();
@@ -63,11 +79,12 @@ public class MatchGUIController {
         {
             HBox hBox = new HBox();
             //add the player first name and last name on the list
-            hBox.getChildren().add(new Label(match.getTeam1() + " vs " + match.getTeam2()+" | "+match.getType()));
+            Label label = new Label(match.getTeam1() + " vs " + match.getTeam2()+" | "+match.getType());
+            label.setPrefWidth(500);
+            hBox.getChildren().add(label);
             //add edit button
             Button editButton = new Button("Edit");
             editButton.getStyleClass().add("buttonGreen");
-            HBox.setMargin(editButton,new Insets(0,5,0,350));
 
             //edit player button event handler using lambda method
             editButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (MouseEvent mouseEvent) -> {
@@ -85,7 +102,7 @@ public class MatchGUIController {
                 labelScore.setText(match.getScore());
                 labelCityName.setText(match.getLocation().getCity());
                 labelCountryName.setText(match.getLocation().getCountry());
-                labelStadiumName.setText(match.getLocation().getCountry());
+                labelStadiumName.setText(match.getLocation().getStadium());
                 comboMatchType.setValue(match.getType());
                 LocalDate localDate = LocalDate.of(match.getDate().getYear(),match.getDate().getMonth(),match.getDate().getDay());
                 matchDate.setValue(localDate);
@@ -120,13 +137,22 @@ public class MatchGUIController {
             removeButton.getStyleClass().add("buttonRed");
             //remove player button event handler using lambda method
             removeButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (MouseEvent mouseEvent)->{
-                System.out.println("Test");
-                adapter.removeMatch(match);
-                setListDetails(adapter.getAllMatches());
+
+                //Ask for a confirmation to delete the match, if the OK button was pressed the deletion process can start and save into file
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to delete the match\n("+match.getTeam1()+" vs "+match.getTeam2()+") from the system?");
+                Optional<ButtonType> result = alert.showAndWait();
+                if(result.get()== ButtonType.OK)
+                {
+                    adapter.removeMatch(match);
+                    setListDetails(adapter.getAllMatches());
+                }
             });
 
+            //Add a little space between edit and remove button
+            HBox.setMargin(editButton,new Insets(0,5,0,0));
             //add the buttons on HBox and after populate the playerList with the hBox
             hBox.getChildren().addAll(editButton,removeButton);
+
             matchList.getItems().add(hBox);
         }
     }

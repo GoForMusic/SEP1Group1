@@ -117,7 +117,6 @@ public class VIAClubAdapter
     ArrayList<Match> matches = getAllMatches();
     if(matches.contains(obj))
     {
-      System.out.println("Test1");
       matches.remove(obj);
     }
     MyFileIO.writeObjectToFile(matchesFileName,matches);

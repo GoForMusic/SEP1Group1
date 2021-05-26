@@ -3,8 +3,6 @@ package View;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Label;
-import javafx.scene.control.Tab;
 import javafx.scene.layout.Pane;
 
 import java.io.IOException;

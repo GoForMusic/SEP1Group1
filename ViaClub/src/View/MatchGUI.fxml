@@ -31,11 +31,17 @@
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
             </Button>
             <ComboBox fx:id="matchType" prefWidth="150.0">
                <HBox.margin>
                   <Insets left="300.0" />
                </HBox.margin>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
             </ComboBox>
             <Button mnemonicParsing="false" onMouseClicked="#clickMouseSearch" prefHeight="24.0" prefWidth="86.0" stylesheets="@resources/style.css" text="Search" />
          </children>
