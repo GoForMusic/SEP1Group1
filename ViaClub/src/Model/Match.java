@@ -26,8 +26,8 @@ public class Match implements Serializable
    * @param team2 visiting team name
    * @param location a copy of the location where the match will be
    * @param type the match type (friendly, league and)
-   * @variable score the score by default will be set to "0-0"
-   * @variable listOfPlayers will initialize the list of players who will play in the specific match
+   * the variable score the score by default will be set to "0-0"
+   * the variable listOfPlayers will initialize the list of players who will play in the specific match
    */
   public Match(MyDate date, String team1, String team2, Location location, String type)
   {
