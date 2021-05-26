@@ -186,6 +186,7 @@ public class MatchGUIController {
             MyDate localDate = new MyDate(matchDate.getValue().getDayOfMonth(), matchDate.getValue().getMonthValue(),matchDate.getValue().getYear());
             Location localLocation = new Location(labelCountryName.getText(),labelCityName.getText(),labelStadiumName.getText());
             Match localMatch = new Match(localDate,labelTeam1Name.getText(),labelTeam2Name.getText(),localLocation, comboMatchType.getValue());
+            localMatch.setScore(labelScore.getText());
 
             if(!playersWhoWillPlay.getItems().isEmpty()){
                 for(Player player:playersWhoWillPlay.getItems()){
