@@ -46,7 +46,7 @@ public class Match implements Serializable
    */
   public void setDate(MyDate date)
   {
-    this.date = date;
+    this.date = date.copy();
   }
 
   /**
@@ -73,7 +73,7 @@ public class Match implements Serializable
    */
   public void setLocation(Location location)
   {
-    this.location = location;
+    this.location = location.copy();
   }
 
   /**

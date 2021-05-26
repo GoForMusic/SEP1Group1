@@ -4,7 +4,7 @@ import Model.Location;
 import Model.Match;
 import Model.MyDate;
 import Model.Player;
-import Utils.VIAClubAdapter;
+import Utils.VIAClubModelManager;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
@@ -45,7 +45,7 @@ public class MatchGUIController {
     @FXML private Label labelPlayersWhoArePlaying;
 
 
-    private VIAClubAdapter adapter;
+    private VIAClubModelManager manager;
     private ArrayList<Player> players;
     private ArrayList<Match> matches;
     private int matchIndex;
@@ -57,13 +57,13 @@ public class MatchGUIController {
      * */
     public void initialize()
     {
-        adapter = new VIAClubAdapter("players.bin","matches.bin","matches.xml");
-        players = adapter.getAllPlayers();
+        manager = new VIAClubModelManager("players.bin","matches.bin","matches.xml");
+        players = manager.getAllPlayers();
         matchType.getItems().addAll("All","Friendly","League","Cup");
         matchType.getSelectionModel().selectFirst();
         comboMatchType.getItems().addAll("Friendly","League","Cup");
         comboMatchType.getSelectionModel().selectFirst();
-        setListDetails(adapter.getAllMatches());
+        setListDetails(manager.getAllMatches());
     }
 
     /**
@@ -143,8 +143,8 @@ public class MatchGUIController {
                 Optional<ButtonType> result = alert.showAndWait();
                 if(result.get()== ButtonType.OK)
                 {
-                    adapter.removeMatch(match);
-                    setListDetails(adapter.getAllMatches());
+                    manager.removeMatch(match);
+                    setListDetails(manager.getAllMatches());
                 }
             });
 
@@ -193,12 +193,12 @@ public class MatchGUIController {
                 }
             }
 
-            adapter.editMatch(localMatch,matchIndex);
+            manager.editMatch(localMatch,matchIndex);
             Alert alert = new Alert(Alert.AlertType.INFORMATION, "The match details have been saved!");
             alert.showAndWait();
             dialogPop.setVisible(false);
             //update the player list with the new player
-            setListDetails(adapter.getAllMatches());
+            setListDetails(manager.getAllMatches());
             clickMouseCancelEvent(event);
         }
     }
@@ -221,12 +221,12 @@ public class MatchGUIController {
             MyDate localDate = new MyDate(matchDate.getValue().getDayOfMonth(), matchDate.getValue().getMonthValue(),matchDate.getValue().getYear());
             Location localLocation = new Location(labelCountryName.getText(),labelCityName.getText(),labelStadiumName.getText());
             Match localMatch = new Match(localDate,labelTeam1Name.getText(),labelTeam2Name.getText(),localLocation, comboMatchType.getValue());
-            adapter.saveMatch(localMatch);
+            manager.saveMatch(localMatch);
             Alert alert = new Alert(Alert.AlertType.INFORMATION, "The match have been created!");
             alert.showAndWait();
             dialogPop.setVisible(false);
             //update the player list with the new player
-            setListDetails(adapter.getAllMatches());
+            setListDetails(manager.getAllMatches());
             clickMouseCancelEvent(event);
         }
     }
@@ -258,9 +258,9 @@ public class MatchGUIController {
     @FXML void clickMouseSearch(MouseEvent event) {
         if(matchType.getValue()=="All")
         {
-            setListDetails(adapter.getAllMatches());
+            setListDetails(manager.getAllMatches());
         }else{
-            setListDetails(adapter.getAllMatchesType(matchType.getValue()));
+            setListDetails(manager.getAllMatchesType(matchType.getValue()));
         }
     }
 

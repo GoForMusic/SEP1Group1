@@ -1,8 +1,7 @@
 package View;
 
 import Model.Player;
-import Utils.VIAClubAdapter;
-import javafx.event.ActionEvent;
+import Utils.VIAClubModelManager;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
@@ -32,7 +31,7 @@ public class PlayerGUIController {
     @FXML private ComboBox<String> playerType;
 
 
-    private VIAClubAdapter adapter;
+    private VIAClubModelManager manager;
     private ArrayList<Player> players;
     private int playerIndex;
 
@@ -45,12 +44,12 @@ public class PlayerGUIController {
     public void initialize()
     {
         playerIndex=0;
-        adapter = new VIAClubAdapter("players.bin","matches.bin","matches.xml");
+        manager = new VIAClubModelManager("players.bin","matches.bin","matches.xml");
         playerType.getItems().addAll("All","Available","Suspended","Injured");
         playerType.getSelectionModel().selectFirst();
         comboPlayerStatus.getItems().addAll("Available","Suspended","Injured");
         comboPlayerStatus.getSelectionModel().selectFirst();
-        setListDetails(adapter.getAllPlayers());
+        setListDetails(manager.getAllPlayers());
     }
 
     /**
@@ -98,8 +97,8 @@ public class PlayerGUIController {
                 Optional<ButtonType> result = alert.showAndWait();
                 if(result.get()== ButtonType.OK)
                 {
-                    adapter.removePlayer(player);
-                    setListDetails(adapter.getAllPlayers());
+                    manager.removePlayer(player);
+                    setListDetails(manager.getAllPlayers());
                 }
 
             });
@@ -147,12 +146,12 @@ public class PlayerGUIController {
             Player localPlayer = new Player(labelFirstName.getText(), labelSecondName.getText(), Integer.parseInt(labelPlayerNumber.getText()), labelPreferredPosition.getText(), comboPlayerStatus.getValue());
 
             //edit the object on the specific index who will be stored in the lambda function
-            adapter.editPlayer(localPlayer,playerIndex);
+            manager.editPlayer(localPlayer,playerIndex);
             Alert alert = new Alert(Alert.AlertType.INFORMATION, "The player new details have been saved!");
             alert.showAndWait();
             dialogPop.setVisible(false);
             //update the player list with the new player
-            setListDetails(adapter.getAllPlayers());
+            setListDetails(manager.getAllPlayers());
             clickMouseCancelEvent(event);
         }
     }
@@ -169,12 +168,12 @@ public class PlayerGUIController {
             alert.showAndWait();
         }else {
             Player localPlayer = new Player(labelFirstName.getText(), labelSecondName.getText(), Integer.parseInt(labelPlayerNumber.getText()), labelPreferredPosition.getText(), comboPlayerStatus.getValue());
-            adapter.savePlayer(localPlayer);
+            manager.savePlayer(localPlayer);
             Alert alert = new Alert(Alert.AlertType.INFORMATION, "The player have been created!");
             alert.showAndWait();
             dialogPop.setVisible(false);
             //update the player list with the new player
-            setListDetails(adapter.getAllPlayers());
+            setListDetails(manager.getAllPlayers());
             clickMouseCancelEvent(event);
         }
     }
@@ -185,9 +184,9 @@ public class PlayerGUIController {
     @FXML void clickMouseSearch(MouseEvent event) {
         if(playerType.getValue()=="All")
         {
-            setListDetails(adapter.getAllPlayers());
+            setListDetails(manager.getAllPlayers());
         }else{
-            setListDetails(adapter.getAllPlayersStatus(playerType.getValue()));
+            setListDetails(manager.getAllPlayersStatus(playerType.getValue()));
         }
     }
 }

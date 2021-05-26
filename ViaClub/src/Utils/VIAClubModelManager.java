@@ -11,7 +11,7 @@ import java.util.ArrayList;
  * @version 1.0
  */
 
-public class VIAClubAdapter
+public class VIAClubModelManager
 {
   private String playersFileName;
   private String matchesFileName;
@@ -24,7 +24,7 @@ public class VIAClubAdapter
    * @param matchesFileName the binary file name where the matches will be stored
    * @param xmlFileName the text file name where will be exported as xml format all the matches for website
    */
-  public VIAClubAdapter(String playersFileName, String matchesFileName, String xmlFileName)
+  public VIAClubModelManager(String playersFileName, String matchesFileName, String xmlFileName)
   {
     this.matchesFileName=matchesFileName;
     this.playersFileName=playersFileName;

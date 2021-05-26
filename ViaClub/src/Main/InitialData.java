@@ -1,7 +1,7 @@
 package Main;
 
 import Model.*;
-import Utils.VIAClubAdapter;
+import Utils.VIAClubModelManager;
 
 
 /**
@@ -14,7 +14,7 @@ public class InitialData {
     public static void main(String[] args)
     {
         VIAClub viaClub = new VIAClub();
-        VIAClubAdapter adapter = new VIAClubAdapter("players.bin","matches.bin","matches.xml");
+        VIAClubModelManager adapter = new VIAClubModelManager("players.bin","matches.bin","matches.xml");
 
         Player player = new Player("Adrian","Militaru",69,"Center","Injured");
         Player player2 = new Player("Adrian","Pompierescu",2,"Gate","Available");
