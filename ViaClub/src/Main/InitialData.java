@@ -1,9 +1,11 @@
+package Main;
+
 import Model.*;
 import Utils.VIAClubAdapter;
 
 
 /**
- * The InitialData class initializes 4 players and 4 matches.After running it, the Main class should be run so the GUI will start.
+ * The Main.InitialData class initializes 4 players and 4 matches.After running it, the Main.Main class should be run so the GUI will start.
  * @author Adrian Militaru, Adrian Pompierescu, Gabriel Moutinho Tristan, Freja Hansen
  * @version 1.0
  */
