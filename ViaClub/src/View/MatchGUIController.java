@@ -194,7 +194,7 @@ public class MatchGUIController {
             }
 
             adapter.editMatch(localMatch,matchIndex);
-            Alert alert = new Alert(Alert.AlertType.INFORMATION, "The match have been created!");
+            Alert alert = new Alert(Alert.AlertType.INFORMATION, "The match details have been saved!");
             alert.showAndWait();
             dialogPop.setVisible(false);
             //update the player list with the new player
