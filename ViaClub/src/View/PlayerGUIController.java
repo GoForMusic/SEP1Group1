@@ -2,12 +2,14 @@ package View;
 
 import Model.Player;
 import Utils.VIAClubAdapter;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import java.util.ArrayList;
+import java.util.Optional;
 
 /**
  * The Player GUI controller allow to see and modify details
@@ -37,7 +39,7 @@ public class PlayerGUIController {
 
     /**
     * This method will initialize the data when the player interface is opened.
-    * Firstly, declares the adaptor object of type VIAClubAdaptor and a global variable of type int called playerIndex
+    * Firstly, declares the adaptor object of type VIAClubAdaptor and a global variables
     * Also, this method will load and set all the players in a list view
     * */
     public void initialize()
@@ -64,11 +66,12 @@ public class PlayerGUIController {
         {
             HBox hBox = new HBox();
             //add the player first name and last name on the list
-            hBox.getChildren().add(new Label(player.getFirstName() + " " + player.getLastName()+" | "+ player.getStatus()));
+            Label label = new Label(player.getFirstName() + " " + player.getLastName()+" | "+ player.getStatus());
+            label.setPrefWidth(500);
+            hBox.getChildren().add(label);
             //add edit button
             Button editButton = new Button("Edit");
             editButton.getStyleClass().add("buttonGreen");
-            HBox.setMargin(editButton,new Insets(0,5,0,350));
 
             //edit player button event handler using lambda method
             editButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (MouseEvent mouseEvent) -> {
@@ -89,10 +92,20 @@ public class PlayerGUIController {
             removeButton.getStyleClass().add("buttonRed");
             //remove player button event handler using lambda method
             removeButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (MouseEvent mouseEvent)->{
-                adapter.removePlayer(player);
-                setListDetails(adapter.getAllPlayers());
+
+                //Ask for a confirmation to delete the player, if the OK button was pressed the deletion process can start and save into file
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to delete player\n("+player.getFirstName()+" "+player.getLastName()+") from the system?");
+                Optional<ButtonType> result = alert.showAndWait();
+                if(result.get()== ButtonType.OK)
+                {
+                    adapter.removePlayer(player);
+                    setListDetails(adapter.getAllPlayers());
+                }
+
             });
 
+            //Add a little space between edit and remove button
+            HBox.setMargin(editButton,new Insets(0,5,0,0));
             //add the buttons on HBox and after populate the playerList with the hBox
             hBox.getChildren().addAll(editButton,removeButton);
             playerList.getItems().add(hBox);
